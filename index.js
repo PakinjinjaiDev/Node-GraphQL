@@ -1,44 +1,15 @@
-require('dotenv').config(); 
+require("dotenv").config();
 const express = require("express");
-const { buildSchema } = require("graphql");
-const { createHandler } = require("graphql-http/lib/use/express");
-const User = require("./models/User"); // เพิ่มการ import User จากโมเดล
+const cors = require("cors");
+const graphqlHandler = require("./routes/graphql");
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
-// Schema และ resolver ตามที่คุณกำหนดไว้
-const schema = buildSchema(`
-  type Query {
-    message: String
-    users: [User]
-  }
+// GraphQL API
+app.all("/graphql", graphqlHandler);
 
-  type User {
-    id: ID
-    name: String
-    email: String
-  }
-`);
-
-const root = {
-  message: () => "Hello, GraphQL with graphql-http!",
-  users: async () => {
-    try {
-      const mssqlUsers = await User.mssql.findAll();
-      return [...mssqlUsers]; 
-    } catch (error) {
-      console.error("❌ Error fetching users:", error);
-      return [];
-    }
-  }
-};
-
-// ใช้ graphql-http เป็น middleware
-app.all("/graphql", createHandler({
-  schema,
-  rootValue: root
-}));
 // เส้นทางให้ข้อมูลวิธีการทดสอบผ่าน Postman หรือ Apollo Studio Explorer
 app.get("/docs", (req, res) => {
   res.send(`

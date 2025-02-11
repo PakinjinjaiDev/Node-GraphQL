@@ -2,7 +2,7 @@ const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(process.env.MSSQL_DB, process.env.MSSQL_USER, process.env.MSSQL_PASSWORD, {
   dialect: "mssql",
-  server: process.env.MSSQL_HOST,  // ✅ เปลี่ยนจาก host → server
+  host: process.env.MSSQL_HOST, 
   port: process.env.MSSQL_PORT,   // ✅ ใช้ port ตาม .env
   dialectOptions: {
     options: {
