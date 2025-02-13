@@ -2,13 +2,14 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const graphqlHandler = require("./routes/graphql");
+const basicAuth = require("./middleware/basicAuth"); // ✅ Import Middleware
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 // GraphQL API
-app.all("/bi-team", graphqlHandler);
+app.all("/bi-team", basicAuth, graphqlHandler);
 
 // เส้นทางให้ข้อมูลวิธีการทดสอบผ่าน Postman หรือ Apollo Studio Explorer
 app.get("/docs", (req, res) => {
