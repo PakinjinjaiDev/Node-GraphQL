@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const mssql = require("../db/mssql"); // เชื่อมต่อกับ MSSQL
+const mssql = require("../config/mssql"); // เชื่อมต่อกับ MSSQL
 
 const User = mssql.define("User", { 
   name: DataTypes.STRING,

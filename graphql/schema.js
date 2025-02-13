@@ -7,7 +7,7 @@ const schema = buildSchema(`
   }
 
   type User {
-    id: ID
+    id: String
     name: String
     email: String
   }

@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 // GraphQL API
-app.all("/graphql", graphqlHandler);
+app.all("/bi-team", graphqlHandler);
 
 // เส้นทางให้ข้อมูลวิธีการทดสอบผ่าน Postman หรือ Apollo Studio Explorer
 app.get("/docs", (req, res) => {
@@ -29,6 +29,6 @@ app.get("/docs", (req, res) => {
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}/graphql`);
+  console.log(`🚀 Server running on http://localhost:${PORT}/bi-team`);
   console.log(`📜 API documentation available at http://localhost:${PORT}/docs`);
 });
