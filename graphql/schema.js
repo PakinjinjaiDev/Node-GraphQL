@@ -5,6 +5,7 @@ const schema = buildSchema(`
     message: String
     users: [User]
     combined(limit: Int, page: Int): [comBined]
+    idc_btt(limit: Int, page: Int): [idc_btt]
   }
 
   type User {
@@ -12,7 +13,14 @@ const schema = buildSchema(`
     name: String
     email: String
   }
-  
+  type idc_btt {
+    id: Int
+    device_name: String
+    unit: String
+    unixtime: String
+    time: String
+    value: Float
+  }
   type comBined {
    month: String
    type: String
