@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  graphql-server:
+    build: .
+    container_name: graphql-server
+    ports:
+      - "4000:4000"  # ให้สามารถเข้าถึง GraphQL ได้จาก localhost:4000
+    environment:
+      - NODE_ENV=development
+      - PORT=4000
+      - MSSQL_HOST=host.docker.internal  # เชื่อมต่อกับ MSSQL Container ที่รันอยู่
+      - MSSQL_PORT=1433
+      - MSSQL_DB=db_graphql
+      - MSSQL_USER=sa
+      - MSSQL_PASSWORD=Pakin281244
+      - MYSQL_HOST=host.docker.internal  # เชื่อมต่อกับ MySQL Container ที่รันอยู่
+      - MYSQL_PORT=3306
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DB=db_graphql
+    env_file:
+      - .env
+    volumes:
+      - .:/app  # Mount โค้ดจากเครื่องจริงเข้า Container เพื่อให้ nodemon ทำงานได้
+      - /app/node_modules  # ไม่ให้ node_modules จากเครื่อง host ทับของ Container
+    restart: always
