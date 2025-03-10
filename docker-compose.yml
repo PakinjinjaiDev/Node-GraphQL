@@ -1,4 +1,10 @@
 version: '3.8'
+
+# หากใช้งาน Database จากเครื่องภายนอก(เช่น บนเซิร์ฟเวอร์ภายนอก, cloud, หรือ VM อื่นๆ)
+# ไม่ได้สร้าง Database จาก docker ไว้ภายในเครื่องตัวเอง
+# สามารถที่จะลบในส่วนของ environment: ออกได้ และใช้งานเพียง env_file:
+# บน Linux host.docker.internal อาจใช้ไม่ได้ ให้ใช้ bridge network หรือระบุ IP แทน ❗
+# host.docker.internal use on (Windows/Mac)
 services:
   graphql-server:
     build: .
