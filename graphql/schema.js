@@ -7,6 +7,11 @@ const schema = buildSchema(`
     combined(limit: Int, page: Int): [comBined]
     idc_btt(limit: Int, page: Int): [idc_btt]
   }
+  type Mutation {
+    createUser(name: String!, email: String!): User
+    updateUser(id: Int!, name: String, email: String): User
+    deleteUser(id: Int!): String
+  }
   type User {
     id: String
     name: String
