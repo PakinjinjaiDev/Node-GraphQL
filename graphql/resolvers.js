@@ -3,7 +3,6 @@ const mssql = require("../config/mssql"); // เชื่อมต่อกั�
 
 const resolvers = {
   message: () => "Hello, GraphQL with graphql-http!",
-
   users: async () => {
     try {
       return await User.findAll();
@@ -12,7 +11,6 @@ const resolvers = {
       return [];
     }
   },
-
   combined: async ({ limit, page }) => {
     try {
       const offset = (page - 1) * limit;
@@ -27,7 +25,6 @@ const resolvers = {
       return [];
     }
   },
-
   idc_btt: async ({ limit, page }) => {
     try {
       const offset = (page - 1) * limit;

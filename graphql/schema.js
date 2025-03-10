@@ -7,7 +7,6 @@ const schema = buildSchema(`
     combined(limit: Int, page: Int): [comBined]
     idc_btt(limit: Int, page: Int): [idc_btt]
   }
-
   type User {
     id: String
     name: String
