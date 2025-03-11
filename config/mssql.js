@@ -4,6 +4,7 @@ const sequelize = new Sequelize(process.env.MSSQL_DB, process.env.MSSQL_USER, pr
   dialect: "mssql",
   host: process.env.MSSQL_HOST, 
   port: process.env.MSSQL_PORT,   // ✅ ใช้ port ตาม .env
+  logging: false,  // ✅ ปิดการแสดงผล SQL Query
   dialectOptions: {
     options: {
       encrypt: true,   // สำคัญสำหรับ Azure SQL
@@ -13,7 +14,7 @@ const sequelize = new Sequelize(process.env.MSSQL_DB, process.env.MSSQL_USER, pr
 });
 
 sequelize.authenticate()
-  .then(() => console.log("✅ Connected to SQL Server"))
-  .catch(err => console.error("❌ SQL Server connection error:", err));
+  // .then(() => console.log("✅ Connected to SQL Server"))
+  // .catch(err => console.error("❌ SQL Server connection error:", err));
 
 module.exports = sequelize;

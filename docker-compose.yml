@@ -26,5 +26,7 @@ services:
       - .env
     volumes:
       - .:/app  # Mount โค้ดจากเครื่องจริงเข้า Container เพื่อให้ nodemon ทำงานได้
-      - /app/node_modules  # ไม่ให้ node_modules จากเครื่อง host ทับของ Container
+      - node_modules:/app/node_modules  # ไม่ให้ node_modules จากเครื่อง host ทับของ Container
     restart: always
+volumes:
+  node_modules:  # ✅ กำหนด Named Volume ให้กับ node_modules
