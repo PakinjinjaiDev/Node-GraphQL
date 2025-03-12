@@ -8,7 +8,13 @@ const resolvers = {
   ...queryResolvers,
   ...userQuery,
   ...ibcbttQuery,
-  ...combinedQuery,
+  // ...combinedQuery,
+  combined: combinedQuery.combined,
+  // ทำไมไม่ใช้ ...combinedQuery แทน combined: combinedQuery.combined
+  // เพราะ combinedQuery เป็น object ที่มี key คือ combined ดังนั้นหากใช้: ...combinedQuery
+  // GraphQL จะคาดหวังว่า combinedQuery จะมีหลาย resolver 
+  // แต่ในกรณีนี้ combinedQuery มีแค่ หนึ่ง resolver (combined) 
+  // เราจึงต้องระบุชัดเจนเป็น: combined: combinedQuery.combined
   ...userMutation,
 };
 
