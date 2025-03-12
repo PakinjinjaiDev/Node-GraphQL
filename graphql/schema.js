@@ -4,7 +4,7 @@ const schema = buildSchema(`
   type Query {
     message: String
     users: [User]
-    combined(limit: Int, page: Int): [comBined]
+    combined(limit: Int, page: Int): CombinedResponse
     idc_btt(limit: Int, page: Int): [idc_btt]
   }
   type Mutation {
@@ -24,6 +24,10 @@ const schema = buildSchema(`
     unixtime: String
     time: String
     value: Float
+  }
+  type CombinedResponse {
+    data: [comBined]
+    last_page: Int
   }
   type comBined {
    month: String
