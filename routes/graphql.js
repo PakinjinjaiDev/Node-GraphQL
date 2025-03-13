@@ -6,12 +6,19 @@ module.exports = createHandler({
   schema,
   rootValue: resolvers,
   formatError: (err) => {
-    // log error เพื่อ debug
-    // console.error("GraphQL Error:", err);
-    return {
-      status: "error",
-      message: "มีข้อผิดพลาดบางอย่างในการร้องขอ กรุณาตรวจสอบ Query หรือ Mutations ของคุณ",
-      // detail: `${err}`
-    };
-  },
+    const message = err.message;
+    switch (true) {
+      case message.includes("Cannot query field"):
+        return { message: "Cannot query field" };
+      case message.includes("Syntax Error") && message.includes("Unexpected character"):
+        return { message: "Unexpected character" };
+      case message.includes("Syntax Error"):
+        return { message: "Syntax Error" };
+      case message.includes("Unknown argument"):
+        return { message: "Unknown argument" };
+      default:
+        return { message };
+    }
+  }
 });
+
