@@ -3,13 +3,17 @@ const express = require("express");
 const cors = require("cors");
 const graphqlHandler = require("./routes/graphql");
 const basicAuth = require("./middleware/basicAuth"); // ✅ Import Middleware
+const logGraphQLRequest = require("./middleware/loggingDB");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(logGraphQLRequest);
 
 // GraphQL API
 app.all("/bi-team", basicAuth, graphqlHandler);
+// console.log("🔍 ENV VARIABLES:", process.env);
+
 
 // เส้นทางให้ข้อมูลวิธีการทดสอบผ่าน Postman หรือ Apollo Studio Explorer
 app.get("/docs", (req, res) => {
