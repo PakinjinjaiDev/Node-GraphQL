@@ -1,3 +1,5 @@
+const mssql = require("../config/mssql");
+
 const logGraphQLRequest = async (req, res, next) => {
   if (req.method === "POST" && req.url === "/bi-team") {
     const startTime = process.hrtime();
@@ -15,7 +17,6 @@ const logGraphQLRequest = async (req, res, next) => {
     console.log("📌 Type:", type);
     console.log("🔍 Query Details:", details);
     console.log("📦 Variables:", variables);
-
     // ✅ ดักจับ response โดย override res.end
     let responseBody = "";
     const originalEnd = res.end;
