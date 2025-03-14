@@ -6,11 +6,13 @@ const logGraphQLRequest = async (req, res, next) => {
     const { query, variables } = req.body;
     const ip = req.ip;
     const userAgent = req.headers["user-agent"];
-    const headers = req.headers["authorization"] ? "Have Authorization" : "No Authorization";
+    const headers = req.headers["authorization"]
+      ? "Have Authorization"
+      : "No Authorization";
     const trimmedQuery = query.trim().toLowerCase();
     const isMutation = trimmedQuery.startsWith("mutation");
     const type = isMutation ? "MUTATION" : "QUERY";
-    const details = query
+    const details = query;
     console.log("📌 IP:", ip);
     console.log("🖥 User Agent:", userAgent);
     console.log("🔑 Headers:", headers);
@@ -26,11 +28,22 @@ const logGraphQLRequest = async (req, res, next) => {
     };
     res.on("finish", () => {
       const endTime = process.hrtime(startTime);
-      const responseTime = (endTime[0] * 1000 + endTime[1] / 1e6).toFixed(2) + " ms";
+      const responseTime =
+        (endTime[0] * 1000 + endTime[1] / 1e6).toFixed(2) + " ms";
       let status = "SUCCESS";
+      let message = "No error occurred";
       try {
         const responseData = JSON.parse(responseBody);
-        if (responseData.errors) status = "ERROR";
+        if (responseData.errors) {
+          status = "ERROR";
+          // ✅ ตรวจสอบว่า responseData.errors เป็น array และดึงข้อความ error ออกมา
+          if (Array.isArray(responseData.errors)) {
+            message = responseData.errors.map((err) => err.message).join(" | ");
+          } else {
+            message = "Unknown GraphQL Error";
+          }
+        }
+        console.log("✉️ Message:", message);
       } catch (err) {
         status = "ERROR"; // JSON parse ไม่ได้ ถือว่าล้มเหลว
       }

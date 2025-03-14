@@ -16,6 +16,8 @@ module.exports = createHandler({
         return { message: "Syntax Error" };
       case message.includes("Unknown argument"):
         return { message: "Unknown argument" };
+      case message.includes("Variable"):
+        return { message: "Variable of required type was not provided."}
       default:
         return { message };
     }
