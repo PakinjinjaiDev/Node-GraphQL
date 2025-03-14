@@ -12,18 +12,26 @@ NODE-GRAPHQL/
 │   ├── postgresql.js     # PostgreSQL connection
 │
 │── graphql/              # GraphQL schema and resolvers
-│   ├── resolvers.js      # Resolver functions
-│   ├── schema.js         # GraphQL schema
+│   │── resolvers/        # Resolver functions
+│   │   ├── combinedQuery.js
+│   │   ├── ibcbttQuery.js
+│   │   ├── userMutations.js
+│   │   ├── userQuery.js
+│   │   ├── index.js      # Resolver entry point
+│   │── schema.js         # GraphQL schema
 │
 │── middleware/           # Authentication and middleware
 │   ├── basicAuth.js      # Basic authentication middleware
+│   ├── loggingDB.js      # Logging middleware for debugging requests
 │
-│── models/               # Data models
-│   ├── manageService.js  # Manage service model
-│   ├── User.js           # User model
+│── models/               # Data models (Sequelize ORM)
+│   ├── manageService.js  # ManageService Model
+│   ├── User.js           # User Model
 │
-│── routes/               # Express routes
-│   ├── graphql.js        # GraphQL API route
+│── node_modules/         # Node.js dependencies (auto-generated)
+│
+│── routes/               # Application routes
+│   ├── graphql.js        # GraphQL API route setup
 │
 │── .dockerignore         # Ignore files when building Docker image
 │── .env                  # Environment variables (not included in the repo)
@@ -32,7 +40,8 @@ NODE-GRAPHQL/
 │── DockerFile            # Docker image configuration
 │── index.js              # Main entry point
 │── package.json          # Dependencies and scripts
-│── package-lock.json     # Version lock for dependencies
+│── package-lock.json     # Lock file for npm dependencies
+│── README.md             # Project documentation
 ```
 
 ## 🚀 Getting Started
