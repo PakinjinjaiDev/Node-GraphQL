@@ -17,7 +17,7 @@ NODE-GRAPHQL/
 │   │   ├── ibcbttQuery.js
 │   │   ├── userMutations.js
 │   │   ├── userQuery.js
-│   │   ├── index.js      # Resolver entry point
+│   │── index.js          # Resolver entry point
 │   │── schema.js         # GraphQL schema
 │
 │── middleware/           # Authentication and middleware
