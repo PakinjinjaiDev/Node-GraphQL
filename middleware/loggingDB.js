@@ -11,12 +11,16 @@ const logGraphQLRequest = async (req, res, next) => {
     const isMutation = trimmedQuery.startsWith("mutation");
     const type = isMutation ? "MUTATION" : "QUERY";
     const details = query;
+    // ✅ แปลง variables ให้เป็นเฉพาะคีย์ หรือ null
+    const variablesKeys = variables && typeof variables === "object" 
+      ? Object.keys(variables).join(", ") // ดึงเฉพาะคีย์
+      : "No variables"; // ถ้าไม่มี variables ให้เป็น message 
     console.log("📌 IP:", ip);
     console.log("🖥 User Agent:", userAgent);
     console.log("🔑 Headers:", headers);
     console.log("📌 Type:", type);
     console.log("🔍 Query Details:", details);
-    console.log("📦 Variables:", variables);
+    console.log("📦 Variables:", variablesKeys);
     // ✅ ดักจับ response โดย override res.end
     let responseBody = "";
     const originalEnd = res.end;
@@ -50,9 +54,7 @@ const logGraphQLRequest = async (req, res, next) => {
           insert into ${
             process.env.GRPAHQL_LOG
           } ( ip, user_agent, header, type, status, detail, message, variables, response_time)
-          values ('${ip}', '${userAgent}', '${headers}', '${type}', '${status}', '${message}', '${details}', '${JSON.stringify(
-          variables
-        )}', '${responseTime}')
+          values ('${ip}', '${userAgent}', '${headers}', '${type}', '${status}', '${details}', '${message}', '${variablesKeys}', '${responseTime}')
         `);
         console.log("✅ GraphQL request logged to database");
       } catch (e) {
