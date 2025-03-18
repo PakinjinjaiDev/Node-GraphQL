@@ -6,9 +6,7 @@ const logGraphQLRequest = async (req, res, next) => {
     const { query, variables } = req.body;
     const ip = req.ip;
     const userAgent = req.headers["user-agent"];
-    const headers = req.headers["authorization"]
-      ? "Have Authorization"
-      : "No Authorization";
+    const headers = req.headers["authorization"] ? "Have Authorization" : "No Authorization";
     const trimmedQuery = query.trim().toLowerCase();
     const isMutation = trimmedQuery.startsWith("mutation");
     const type = isMutation ? "MUTATION" : "QUERY";
@@ -26,7 +24,7 @@ const logGraphQLRequest = async (req, res, next) => {
       if (chunk) responseBody += chunk.toString(); // เก็บ response data
       originalEnd.apply(res, arguments); // ส่ง response กลับไป
     };
-    res.on("finish", () => {
+    res.on("finish", async () => {
       const endTime = process.hrtime(startTime);
       const responseTime =
         (endTime[0] * 1000 + endTime[1] / 1e6).toFixed(2) + " ms";
@@ -46,6 +44,19 @@ const logGraphQLRequest = async (req, res, next) => {
         console.log("✉️ Message:", message);
       } catch (err) {
         status = "ERROR"; // JSON parse ไม่ได้ ถือว่าล้มเหลว
+      }
+      try {
+        await mssql.query(`
+          insert into ${
+            process.env.GRPAHQL_LOG
+          } ( ip, user_agent, header, type, status, detail, message, variables, response_time)
+          values ('${ip}', '${userAgent}', '${headers}', '${type}', '${status}', '${message}', '${details}', '${JSON.stringify(
+          variables
+        )}', '${responseTime}')
+        `);
+        console.log("✅ GraphQL request logged to database");
+      } catch (e) {
+        console.error("❌ Failed to log GraphQL request:", e);
       }
       console.log("⏳ Response Time:", responseTime);
       console.log("✅ Status:", status);
