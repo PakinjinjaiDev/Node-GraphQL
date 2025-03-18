@@ -24,6 +24,7 @@ const combinedQuery = {
       return {
         data: result,
         last_page: last_page,
+        message: "success"
       };
     } catch (error) {
       console.error("❌ Error fetching combined:", error);

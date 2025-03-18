@@ -28,6 +28,7 @@ const schema = buildSchema(`
   type CombinedResponse {
     data: [comBined]
     last_page: Int
+    message: String
   }
   type comBined {
    month: String
