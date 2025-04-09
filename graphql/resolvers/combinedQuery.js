@@ -1,26 +1,27 @@
 const mssql = require("../../config/mssql");
+const { parseResolveInfo } = require("graphql-parse-resolve-info"); // ✅ ต้องติดตั้ง: npm install graphql-parse-resolve-info
 
 const combinedQuery = {
-  combined: async ({ limit, page }) => {
+  combined: async ({ limit, page }, context, info) => {
     try {
       const offset = (page - 1) * limit;
+      // ✅ 1. ดึงเฉพาะฟิลด์ที่ผู้ใช้ร้องขอ จาก info
+      const parsedInfo = parseResolveInfo(info);
+      const fieldsRequested = parsedInfo.fieldsByTypeName.CombinedResponse.data.fieldsByTypeName.comBined;
+      const selectedFields = Object.keys(fieldsRequested);
+      const selectedFieldSQL = selectedFields.map(field => `[${field}]`).join(", ");
+      // ✅ 2. Query เฉพาะฟิลด์ที่ผู้ใช้ร้องขอ
       const [result] = await mssql.query(
-        `SELECT * FROM ${process.env.COMBINED_TABLE} 
-             ORDER BY month
-             OFFSET ${offset} ROWS FETCH NEXT ${limit} ROWS ONLY;`
+        `SELECT ${selectedFieldSQL} FROM ${process.env.COMBINED_TABLE}
+         ORDER BY month
+         OFFSET ${offset} ROWS FETCH NEXT ${limit} ROWS ONLY;`
       );
-      // 👉 ดึงจำนวนแถวทั้งหมดของ Table
+      // ✅ 3. Query count ทั้งหมด
       const [totalResult] = await mssql.query(
         `SELECT COUNT(*) AS count FROM ${process.env.COMBINED_TABLE};`
       );
-    //   console.log(totalResult);
-      
       const total_count = totalResult[0]?.count || 0;
-
-      // คำนวณหน้าสุดท้าย
       const last_page = Math.ceil(total_count / limit);
-    //   console.log(last_page);
-      
       return {
         data: result,
         last_page: last_page,
