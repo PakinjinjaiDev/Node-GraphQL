@@ -1,5 +1,5 @@
 const mssql = require("../../config/mssql");
-const { parseResolveInfo } = require("graphql-parse-resolve-info"); // ✅ ต้องติดตั้ง: npm install graphql-parse-resolve-info
+const { parseResolveInfo } = require("graphql-parse-resolve-info");
 
 const combinedQuery = {
   combined: async ({ limit, page }, context, info) => {
