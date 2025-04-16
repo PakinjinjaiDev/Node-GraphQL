@@ -4,7 +4,6 @@ const resolvers = require("../graphql/index");
 
 module.exports = createHandler({
   schema,
-  rootValue: resolvers,
   formatError: (err) => {
     const message = err.message;
     switch (true) {
