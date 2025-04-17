@@ -33,7 +33,7 @@ NODE-GRAPHQL/
 ├── index.js                     # 🏁 Entry point to start the Node.js server
 ├── package.json                 # Project metadata, scripts & dependencies
 ├── package-lock.json            # Exact dependency versions for reproducibility
-└── README.md                    # 📘 Project documentation (this file!)
+└── README.md                    # 📘 Project documentation
 ```
 ## 🏗 Project Structure TH
 ```
@@ -62,7 +62,7 @@ NODE-GRAPHQL/
 ├── .env                         # 🔐 เก็บ Environment Variables (เช่น DB Credentials)
 ├── index.js                     # 🏁 จุดเริ่มต้นของแอป (Server Entry Point)
 ├── package.json                 # ข้อมูลและ dependency ของโปรเจกต์
-└── README.md                    # 📘 เอกสารประกอบโปรเจกต์ (ที่คุณกำลังอ่านอยู่นี่!)
+└── README.md                    # 📘 เอกสารประกอบโปรเจกต์
 ```
 
 ## 🚀 Getting Started
