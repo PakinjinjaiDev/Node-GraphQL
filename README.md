@@ -8,34 +8,19 @@ This project is a **GraphQL API** built with **Node.js** and **Express.js**, usi
 NODE-GRAPHQL/
 │
 ├── config/                      # ⚙️ Database connection configurations
-│   ├── mssql.js                 # MSSQL connection setup
-│   ├── mysql.js                 # MySQL connection setup
-│   └── postgresql.js            # PostgreSQL connection setup
 │
 ├── graphql/                     # 🌐 GraphQL schema and resolvers
 │   ├── resolvers/               # 💡 Resolver functions (Query / Mutation logic)
-│   │   ├── combinedQuery.js     # Resolver for Combined data queries
-│   │   ├── ibcbttQuery.js       # Resolver for IDC_BTT data queries
-│   │   ├── userMutations.js     # Resolver for User mutations (create, update, delete)
-│   │   └── userQuery.js         # Resolver for querying User data
 │   │
 │   ├── typeDefs/                # 🧱 GraphQL schema definitions (SDL)
-│   │   ├── baseTypeDefs.js      # Base schema (Query, Mutation root types)
-│   │   ├── combinedTypeDefs.js  # Schema for Combined type
-│   │   ├── ibcbttTypeDefs.js    # Schema for IDC_BTT type
-│   │   ├── userTypeDefs.js      # Schema for User type
 │   │   └── index.js             # Merge all typeDefs using `@graphql-tools/merge`
 │   │
 │   ├── index.js                 # Merge all resolvers using lodash.merge
 │   └── schema.js                # Create executable schema (typeDefs + resolvers)
 │
 ├── middleware/                  # 🛡️ Custom middleware functions
-│   ├── basicAuth.js             # Basic authentication middleware
-│   └── loggingDB.js             # Logging middleware for database/debugging
 │
 ├── models/                      # 🗃️ Sequelize models
-│   ├── manageService.js         # Model for manageService table
-│   └── User.js                  # Model for users table
 │
 ├── routes/                      # 🚏 Express route definitions
 │   └── graphql.js               # Setup for GraphQL API endpoint
@@ -55,34 +40,19 @@ NODE-GRAPHQL/
 NODE-GRAPHQL/
 │
 ├── config/                      # ⚙️ ไฟล์เชื่อมต่อฐานข้อมูล (Database Connections)
-│   ├── mssql.js                 # การตั้งค่าเชื่อมต่อ Microsoft SQL Server
-│   ├── mysql.js                 # การตั้งค่าเชื่อมต่อ MySQL
-│   └── postgresql.js            # การตั้งค่าเชื่อมต่อ PostgreSQL
 │
 ├── graphql/                     # 🌐 โฟลเดอร์หลักของ GraphQL API
 │   ├── resolvers/               # 💡 กลุ่มฟังก์ชัน Resolver (Query, Mutation)
-│   │   ├── userQuery.js         # Logic สำหรับดึงข้อมูลผู้ใช้ (User)
-│   │   ├── userMutations.js     # Logic สำหรับเพิ่ม/อัปเดต/ลบผู้ใช้
-│   │   ├── ibcbttQuery.js       # Logic สำหรับข้อมูลจากตาราง IDC_BTT
-│   │   └── combinedQuery.js     # Logic สำหรับรวมข้อมูลจากหลายแหล่ง
 │   │
 │   ├── typeDefs/                # 🧱 โครงสร้าง Schema แบบแยกไฟล์ (SDL - Schema Definition Language)
-│   │   ├── userTypeDefs.js      # GraphQL type สำหรับ User
-│   │   ├── ibcbttTypeDefs.js    # GraphQL type สำหรับ IDC_BTT
-│   │   ├── combinedTypeDefs.js  # GraphQL type สำหรับ Combined
-│   │   ├── baseTypeDefs.js      # Query/Mutation root types
 │   │   └── index.js             # รวมทุก typeDef ด้วย `@graphql-tools/merge`
 │   │
 │   ├── index.js                 # รวมทุก resolver ด้วย `lodash.merge`
 │   └── schema.js                # สร้าง GraphQL Executable Schema ด้วย `makeExecutableSchema`
 │
 ├── middleware/                  # 🛡️ Middleware สำหรับควบคุมการเข้าถึงและการใช้งาน
-│   ├── basicAuth.js             # Middleware สำหรับ Basic Authentication
-│   └── loggingDB.js             # Middleware สำหรับ Logging การเข้าถึง DB
 │
 ├── models/                      # 🗃️ Sequelize Models (สำหรับ ORM)
-│   ├── User.js                  # โมเดลผู้ใช้งาน (User Table)
-│   └── manageService.js         # โมเดล Manage Service Table
 │
 ├── routes/                      # 🚏 Routing สำหรับ API (Express)
 │   └── graphql.js               # เส้นทางหลักสำหรับ GraphQL Endpoint
