@@ -1,5 +1,5 @@
-# ใช้ Node.js เวอร์ชัน 18 ที่รองรับ Express และ GraphQL
-FROM node:23
+# ใช้ Node.js เวอร์ชัน 23 ที่รองรับ Express และ GraphQL
+FROM node:23-slim
 # กำหนดโฟลเดอร์ทำงานใน Container
 WORKDIR /app
 # คัดลอก package.json และ package-lock.json ก่อน
