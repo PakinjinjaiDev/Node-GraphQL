@@ -13,9 +13,9 @@ NODE-GRAPHQL/
 │   ├── resolvers/               # 💡 Resolver functions (Query / Mutation logic)
 │   │
 │   ├── typeDefs/                # 🧱 GraphQL schema definitions (SDL)
-│   │   └── index.js             # Merge all typeDefs using `@graphql-tools/merge`
 │   │
-│   ├── index.js                 # Merge all resolvers using lodash.merge
+│   ├── index_resolvers.js       # Merge all resolvers using lodash.merge
+│   ├── index_typedefs.js        # Merge all typeDefs using `@graphql-tools/merge`
 │   └── schema.js                # Create executable schema (typeDefs + resolvers)
 │
 ├── middleware/                  # 🛡️ Custom middleware functions
@@ -45,9 +45,9 @@ NODE-GRAPHQL/
 │   ├── resolvers/               # 💡 กลุ่มฟังก์ชัน Resolver (Query, Mutation)
 │   │
 │   ├── typeDefs/                # 🧱 โครงสร้าง Schema แบบแยกไฟล์ (SDL - Schema Definition Language)
-│   │   └── index.js             # รวมทุก typeDef ด้วย `@graphql-tools/merge`
 │   │
-│   ├── index.js                 # รวมทุก resolver ด้วย `lodash.merge`
+│   ├── index_resolvers.js       # รวมทุก resolver ด้วย `lodash.merge`
+│   ├── index_typedefs.js        # รวมทุก typeDef ด้วย `@graphql-tools/merge`
 │   └── schema.js                # สร้าง GraphQL Executable Schema ด้วย `makeExecutableSchema`
 │
 ├── middleware/                  # 🛡️ Middleware สำหรับควบคุมการเข้าถึงและการใช้งาน
