@@ -100,6 +100,32 @@ const ibcbttQuery = {
         });
       }
     },
+    get_idc_btt_by_device: async (parent, args, context, info) => {
+      try {
+        const { device_name } = args;
+        const selectedFieldSQL = getSelectedFields(info);
+        const query = `
+          SELECT ${selectedFieldSQL}
+          FROM ${process.env.IDC_BTT_TABLE}
+          WHERE device_name = '${device_name}';
+        `;
+        const [result] = await mssql.query(query);
+
+        return {
+          message: `Get data by device name ${device_name} successfully`,
+          data: [
+            {
+              device_name,
+              detail: result
+            }
+          ]
+        };
+      } catch (error) {
+        throw new GraphQLError("Failed to fetch data by device", {
+          extensions: { code: "INTERNAL_SERVER_ERROR", error },
+        });
+      }
+    },
   },
 };
 
